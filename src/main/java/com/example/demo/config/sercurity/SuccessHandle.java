@@ -41,7 +41,7 @@ public class SuccessHandle extends SimpleUrlAuthenticationSuccessHandler {
             roles.add(a.getAuthority());
         }
         if (isAdmin(roles)) {
-            url = "/admin";
+            url = "/admins";
         } else if (isUser(roles)) {
             url = "/profile";
         } else {

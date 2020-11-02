@@ -1,7 +1,7 @@
 package com.example.demo.model.article;
 
 import com.example.demo.model.user.Users;
-import com.sun.tools.javac.jvm.Gen;
+//import com.sun.tools.javac.jvm.Gen;
 import lombok.Data;
 
 import javax.persistence.*;

@@ -63,7 +63,7 @@ public class SecurityController {
     }
     @GetMapping("/admin")
     public String adminPage(){
-        return "admin";
+        return "admins/list";
     }
     @GetMapping("/notAuthor")
     public String notAuthorPage(){

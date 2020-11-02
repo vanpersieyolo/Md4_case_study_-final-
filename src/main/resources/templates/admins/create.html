@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head">
+    <meta charset="UTF-8">
+    <!--    <title>Create</title>-->
+</head>
+<body>
+
+<h1>Create new users</h1>
+<p>
+<h4><a href="/admins">-->List of Users</a></h4>
+</p>
+<th:block th:if="${message}">
+    <p th:text="${message}" style="color:green;"></p>
+</th:block>
+
+<form th:object="${users}" method="post">
+    <table id="layout1">
+        <tr>
+            <td>UsersName</td>
+            <td><input type="text" th:field="*{userName}"/></td>
+
+        </tr>
+        <tr>
+            <td>PassWord:</td>
+            <td><input type="text" th:field="*{userPassword}"/></td>
+        </tr>
+        <tr>
+            <td>Role:</td>
+            <td style="width: auto">
+                <select th:field="*{role}">
+                    <option th:each="r : ${roles}" th:value="${r.id}" th:text="${r.nameRole}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Full Name</td>
+            <td><input type="text" th:field="*{fullName}"></td>
+        </tr>
+
+        <tr>
+            <td>Phone:</td>
+            <td><input type="text" th:field="*{phoneNumber}"/></td>
+        </tr>
+
+        <tr>
+            <td>Email:</td>
+            <td><input type="text" th:field="*{email}"/></td>
+        </tr>
+
+
+        <tr>
+            <td>Address</td>
+            <td>
+                <input type="text" th:field="*{address}">
+            </td>
+        </tr>        <tr>
+            <td>Gender</td>
+            <td>
+                <input type="text" th:field="*{gender}">
+            </td>
+        </tr>
+        <tr>
+            <td>Job</td>
+            <td>
+                <input type="text" th:field="*{job}">
+            </td>
+        </tr>
+        <tr>
+            <td>Avatar</td>
+            <td>
+                <input type="text" th:field="*{avatar}">
+            </td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Create"/></td>
+        </tr>
+
+    </table>
+</form>
+</body>
+</html>

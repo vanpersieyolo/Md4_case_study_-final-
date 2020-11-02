@@ -3,6 +3,8 @@ package com.example.demo.service.user;
 import com.example.demo.model.user.Users;
 import com.example.demo.repo.blog.IUsersRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -11,29 +13,45 @@ import java.util.Optional;
 public class UsersService implements IUsersService {
 
     @Autowired
-    private IUsersRepo blogRepo;
+    private IUsersRepo usersRepo;
     @Override
     public Iterable<Users> findAll() {
-        return blogRepo.findAll();
+        return usersRepo.findAll();
     }
 
     @Override
     public Optional<Users> findById(Long id) {
-        return blogRepo.findById(id);
+        return usersRepo.findById(id);
     }
 
     @Override
     public void save(Users users) {
-        blogRepo.save(users);
+        usersRepo.save(users);
     }
 
     @Override
     public void remove(Long id) {
-        blogRepo.deleteById(id);
+        usersRepo.deleteById(id);
     }
 
     @Override
     public Users findByUsersName(String name) {
-        return blogRepo.findByUserName(name);
+        return usersRepo.findByUserName(name);
     }
+    @Override
+    public Page<Users> search(String keyword, Pageable pageable) {
+        return usersRepo.findAllByUserNameContains(keyword, pageable);
+    }
+
+    @Override
+    public void delete(Long id) {
+        usersRepo.deleteById(id);
+    }
+
+    @Override
+    public Page<Users> findAll(Pageable pageable) {
+        return usersRepo.findAll(pageable);
+    }
+
+
 }

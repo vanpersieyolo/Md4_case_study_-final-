@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head">
+</head>
+<body>
+<h1>Edit Users</h1>
+<h4>
+    <a href="/admins">List of User</a>
+</h4>
+<th:block th:if="${message}">
+    <p th:text="${message}"></p>
+</th:block>
+<form  th:object="${usersEdit}" method="post">
+<table>
+        <tr>
+            <td>Role:</td>
+            <td style="width: auto">
+                <select th:field="*{role}">
+                    <option th:each="r : ${roles}" th:value="${r.id}" th:text="${r.nameRole}"></option>
+                </select>
+            </td>
+        </tr>
+    <tr>
+        <td></td>
+        <td><input type="submit" value="Update"/></td>
+    </tr>
+</table>
+</form>
+</body>
+</html>

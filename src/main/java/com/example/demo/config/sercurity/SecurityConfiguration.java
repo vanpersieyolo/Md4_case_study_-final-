@@ -29,9 +29,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/","/profile/**","/friendProfile/**").access("hasRole('USER')")
+                .antMatchers("/","/profile/**","/friendProfile/**","/users/friend/**").access("hasAnyRole('USER','ADMIN')")
                 .antMatchers("/homepage/**").access("hasAnyRole('USER','ADMIN')")
-                .antMatchers("admin/**").access("hasRole('ADMIN')")
+                .antMatchers("/admins").access("hasRole('ADMIN')")
                 .and().formLogin().loginPage("/login").successHandler(successHandle)
                 .and().exceptionHandling().accessDeniedPage("/notAuthor")
                 .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));

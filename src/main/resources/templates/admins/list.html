@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head">
+
+</head>
+<body>
+
+<h1>List of Users</h1>
+<a href="/homepage" class="btn btn-dark">HomePage</a>
+<table>
+    <tr>
+        <td>
+            <form>
+                <label>
+                    Search by name:
+                    <input type="text" name="s">
+                </label>
+                <input type="submit" value="Search">
+            </form>
+
+            <span th:if="${keyword}">
+  Search result for <code>"[[${keyword}]]"</code>, <a th:href="@{/users}">click here to clear</a>.<br>
+</span>
+            There are [[${usersPage.totalElements}]] users(s).
+        </td>
+
+<!--        <td>-->
+<!--            <a href="/admins/create">-->
+<!--                <button>Create Users</button>-->
+<!--            </a>-->
+<!--        </td>-->
+    </tr>
+</table>
+
+<table id="layout1">
+    <caption>List of Users</caption>
+    <a th:href="@{/profile}"></a>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>UsersName</th>
+        <th>UserPass</th>
+        <th>Roles</th>
+        <th>FullName</th>
+        <th>PhoneNumber</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>Gender</th>
+        <th>Job</th>
+        <th>Avatar</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="u : ${usersPage}">
+        <td th:text="${u.id}"></td>
+        <td th:text="${u.userName}"></td>
+        <td th:text="${u.userPassword}"></td>
+        <td th:text="${u.role.nameRole}"></td>
+        <td th:text="${u.fullName}"></td>
+        <td th:text="${u.phoneNumber}"></td>
+        <td th:text="${u.email}"></td>
+        <td th:text="${u.address}"></td>
+        <td th:text="${u.gender}"></td>
+        <td th:text="${u.job}"></td>
+<!--        <td th:text="${u.avatar}"></td>-->
+        <td><img th:src="@{${u.avatar}}" width="70px" style="border-radius: 50%"></td>
+<!--        <td th:text="${u.cover}"></td>-->
+        <td><a th:href="@{/admins/edit/__${u.id}__}">
+            <button>edit</button>
+        </a>
+            <a th:href="@{/admins/delete/__${u.id}__}">
+                <button>delete</button>
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<div>
+    <a th:if="${usersPage.hasPrevious()}"
+       th:href="@{'/admins'(page=${usersPage.number - 1}, size=${usersPage.size}, s=${keyword})}">
+        Previous
+    </a>
+    [[${usersPage.number + 1}]]/[[${usersPage.totalPages}]]
+    <a th:if="${usersPage.hasNext()}"
+       th:href="@{'/admins'(page=${usersPage.number + 1}, size=${usersPage.size}, s=${keyword})}">
+        Next
+    </a>
+</div>
+</body>
+</html>
